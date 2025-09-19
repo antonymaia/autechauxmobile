@@ -49,5 +49,6 @@
         "projectId": "80c391e4-59c8-49ad-a62a-ccd8dcfb670f"
       }
     }
-  }
+  },
+  "icon" :"./assets/images/icon.png"
 }

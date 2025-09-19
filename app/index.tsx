@@ -1,14 +1,28 @@
+import { useAuth } from "@/provider/AuthProvider";
 import { Redirect } from "expo-router";
-import { getStorage } from "./services/storage";
-
+import { ActivityIndicator, View } from "react-native";
 
 export default function Index() {
-  const storage = getStorage();
-  const jwt = storage.getString("jwt");
+    const { isAuthenticated, loading } = useAuth();
 
-  if (jwt) {
+    if (loading) {
+        return (
+            <View
+                style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: "#101e50",
+                }}
+            >
+                <ActivityIndicator size="large" color="#fff" />
+            </View>
+        );
+    }
+
+    if (!isAuthenticated) {
+        return <Redirect href="/login" />;
+    }
+
     return <Redirect href="/(internal)/home" />;
-  }
-
-  return <Redirect href="/login" />;
 }
